@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sardor — Veb dasturchi</title>
+<style>
+:root{--bg:#fafafa;--card:#fff;--tx:#18181b;--tx2:#63636e;--ln:#e4e4e7;--ac:#4f46e5;--ac2:#eef2ff;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e11;--card:#18181c;--tx:#f4f4f5;--tx2:#a1a1aa;--ln:#2a2a31;--ac:#818cf8;--ac2:#1e1e3a}}
+:root[data-theme="dark"]{--bg:#0e0e11;--card:#18181c;--tx:#f4f4f5;--tx2:#a1a1aa;--ln:#2a2a31;--ac:#818cf8;--ac2:#1e1e3a}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+.i{width:1.2em;height:1.2em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+section{padding:72px 0 8px}
+h2{font-size:28px;margin:0 0 8px}
+.sub{color:var(--tx2);margin:0 0 28px}
+
+/* Navbar */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--ln)}
+header .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.logo{font-weight:800;font-size:20px;margin-right:auto}
+.logo span{color:var(--ac)}
+nav{display:flex;gap:4px}
+nav a{padding:6px 12px;border-radius:8px;color:var(--tx2);font-size:15px}
+nav a:hover{background:var(--ac2);color:var(--ac)}
+.ib{width:38px;height:38px;border-radius:10px;border:1px solid var(--ln);background:var(--card);color:var(--tx);display:grid;place-items:center;cursor:pointer}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;border:1px solid var(--ln);background:var(--card);color:var(--tx)}
+.btn.main{background:var(--ac);color:#fff;border-color:var(--ac)}
+.btn:hover{transform:translateY(-2px);transition:.2s}
+.btn:focus-visible,.ib:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+
+/* Hero */
+.hero{display:flex;align-items:center;gap:40px;padding-top:80px}
+.hero .txt{flex:1}
+.hero small{color:var(--ac);font-weight:700;letter-spacing:.5px}
+.hero h1{font-size:clamp(34px,6vw,56px);line-height:1.1;margin:8px 0 16px}
+.hero p{color:var(--tx2);font-size:18px;max-width:520px;margin:0 0 24px}
+.hero .row{display:flex;gap:12px;flex-wrap:wrap}
+.pic{width:220px;height:220px;border-radius:50%;background:linear-gradient(135deg,var(--ac),#ec4899);display:grid;place-items:center;font-size:88px;font-weight:800;color:#fff;flex:none}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:22px;transition:.2s}
+.card:hover{transform:translateY(-4px);border-color:var(--ac)}
+.ico{width:46px;height:46px;border-radius:12px;background:var(--ac2);color:var(--ac);display:grid;place-items:center;font-size:22px;margin-bottom:14px}
+.card h3{margin:0 0 6px;font-size:18px}
+.card p{margin:0;color:var(--tx2);font-size:15px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.tags span{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--ac2);color:var(--ac);font-weight:600}
+.link{display:inline-flex;gap:6px;align-items:center;margin-top:14px;color:var(--ac);font-weight:600;font-size:15px}
+
+/* About stats */
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center}
+.about p{color:var(--tx2);margin:0 0 12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stats div{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:16px;text-align:center}
+.stats b{display:block;font-size:28px;color:var(--ac)}
+.stats span{color:var(--tx2);font-size:14px}
+
+/* Skills bars */
+.bar{margin-bottom:14px}
+.bar div:first-child{display:flex;justify-content:space-between;font-weight:600;font-size:15px;margin-bottom:6px}
+.track{height:8px;border-radius:4px;background:var(--ln);overflow:hidden}
+.track i{display:block;height:100%;width:0;background:var(--ac);border-radius:4px;transition:width 1s}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:1fr 1.2fr;gap:24px}
+.info{display:flex;flex-direction:column;gap:12px}
+.info a{display:flex;align-items:center;gap:12px;padding:14px;background:var(--card);border:1px solid var(--ln);border-radius:12px}
+.info a:hover{border-color:var(--ac)}
+.info .i{color:var(--ac);font-size:20px}
+form{display:flex;flex-direction:column;gap:12px}
+input,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--ln);background:var(--card);color:var(--tx);font:inherit}
+textarea{min-height:110px;resize:vertical}
+#ok{color:var(--ac);font-weight:600;min-height:24px;margin:0}
+footer{text-align:center;color:var(--tx2);padding:48px 0 32px;font-size:14px}
+
+@media(max-width:720px){
+  .hero{flex-direction:column-reverse;text-align:center;padding-top:40px}
+  .hero .row{justify-content:center}
+  .about,.contact{grid-template-columns:1fr}
+  nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Ikonkalar (SVG sprite) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></symbol>
+  <symbol id="db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
+  <symbol id="github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
+  <symbol id="send" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+  <symbol id="mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+  <symbol id="moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+  <symbol id="cart" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">Sardor<span>.dev</span></a>
+    <nav>
+      <a href="#about">Men haqimda</a>
+      <a href="#skills">Ko‘nikmalar</a>
+      <a href="#projects">Loyihalar</a>
+      <a href="#contact">Aloqa</a>
+    </nav>
+    <button class="ib" id="theme" aria-label="Mavzuni almashtirish"><svg class="i"><use href="#moon"/></svg></button>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <!-- Bosh qism -->
+  <div class="hero">
+    <div class="txt">
+      <small>SALOM, MEN SARDOR 👋</small>
+      <h1>Veb dasturchi va dizayner</h1>
+      <p>Zamonaviy, tez va chiroyli saytlar hamda ilovalar yarataman. G‘oyangizni ishlaydigan mahsulotga aylantiraman.</p>
+      <div class="row">
+        <a class="btn main" href="#projects">Loyihalarim <svg class="i"><use href="#arrow"/></svg></a>
+        <a class="btn" href="#contact"><svg class="i"><use href="#mail"/></svg> Bog‘lanish</a>
+      </div>
+    </div>
+    <div class="pic">S</div>
+  </div>
+
+  <!-- Men haqimda -->
+  <section id="about">
+    <h2>Men haqimda</h2>
+    <p class="sub">Qisqacha tanishuv</p>
+    <div class="about">
+      <div>
+        <p>Men Toshkentda yashayman va 3 yildan beri veb-dasturlash bilan shug‘ullanaman. Foydalanuvchiga qulay interfeys va toza kod yozishni yaxshi ko‘raman.</p>
+        <p>Bo‘sh vaqtimda yangi texnologiyalarni o‘rganaman va ochiq manbali loyihalarga hissa qo‘shaman.</p>
+        <span style="color:var(--tx2);display:flex;gap:6px;align-items:center"><svg class="i"><use href="#pin"/></svg> Toshkent, O‘zbekiston</span>
+      </div>
+      <div class="stats">
+        <div><b data-n="30">0</b><span>Loyiha</span></div>
+        <div><b data-n="3">0</b><span>Yillik tajriba</span></div>
+        <div><b data-n="20">0</b><span>Mijoz</span></div>
+        <div><b data-n="5">0</b><span>Mukofot</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ko'nikmalar -->
+  <section id="skills">
+    <h2>Ko‘nikmalar</h2>
+    <p class="sub">Men ishlatadigan asosiy yo‘nalishlar</p>
+    <div class="grid" style="margin-bottom:28px">
+      <div class="card"><div class="ico"><svg class="i"><use href="#code"/></svg></div><h3>Frontend</h3><p>HTML, CSS, JavaScript, React</p></div>
+      <div class="card"><div class="ico"><svg class="i"><use href="#db"/></svg></div><h3>Backend</h3><p>Node.js, Python, SQL bazalar</p></div>
+      <div class="card"><div class="ico"><svg class="i"><use href="#layers"/></svg></div><h3>UI/UX dizayn</h3><p>Figma, prototip va maketlar</p></div>
+      <div class="card"><div class="ico"><svg class="i"><use href="#phone"/></svg></div><h3>Mobil</h3><p>Responsiv va PWA ilovalar</p></div>
+    </div>
+    <div class="bar"><div><span>JavaScript</span><span>90%</span></div><div class="track"><i data-w="90"></i></div></div>
+    <div class="bar"><div><span>HTML va CSS</span><span>95%</span></div><div class="track"><i data-w="95"></i></div></div>
+    <div class="bar"><div><span>React</span><span>80%</span></div><div class="track"><i data-w="80"></i></div></div>
+    <div class="bar"><div><span>Node.js</span><span>75%</span></div><div class="track"><i data-w="75"></i></div></div>
+  </section>
+
+  <!-- Loyihalar -->
+  <section id="projects">
+    <h2>Loyihalar</h2>
+    <p class="sub">So‘nggi ishlarimdan namunalar</p>
+    <div class="grid">
+      <div class="card"><div class="ico"><svg class="i"><use href="#cart"/></svg></div><h3>Onlayn do‘kon</h3><p>To‘lov tizimi va savat bilan to‘liq elektron tijorat sayti.</p><div class="tags"><span>React</span><span>Node.js</span></div><a class="link" href="#">Ko‘rish <svg class="i"><use href="#arrow"/></svg></a></div>
+      <div class="card"><div class="ico"><svg class="i"><use href="#chat"/></svg></div><h3>Chat ilova</h3><p>Real vaqtda xabar almashish va guruhlar yaratish imkoniyati.</p><div class="tags"><span>WebSocket</span><span>Vue</span></div><a class="link" href="#">Ko‘rish <svg class="i"><use href="#arrow"/></svg></a></div>
+      <div class="card"><div class="ico"><svg class="i"><use href="#globe"/></svg></div><h3>Kompaniya sayti</h3><p>Tez yuklanadigan, SEO uchun optimallashtirilgan tanishuv sayti.</p><div class="tags"><span>HTML</span><span>CSS</span></div><a class="link" href="#">Ko‘rish <svg class="i"><use href="#arrow"/></svg></a></div>
+    </div>
+  </section>
+
+  <!-- Aloqa -->
+  <section id="contact">
+    <h2>Bog‘lanish</h2>
+    <p class="sub">Loyihangiz bormi? Yozing, muhokama qilamiz.</p>
+    <div class="contact">
+      <div class="info">
+        <a href="mailto:sardor@example.com"><svg class="i"><use href="#mail"/></svg> sardor@example.com</a>
+        <a href="#"><svg class="i"><use href="#send"/></svg> Telegram: @sardor</a>
+        <a href="#"><svg class="i"><use href="#github"/></svg> github.com/sardor</a>
+      </div>
+      <form id="f">
+        <input required placeholder="Ismingiz" aria-label="Ismingiz">
+        <input required type="email" placeholder="Email" aria-label="Email">
+        <textarea required placeholder="Xabaringiz" aria-label="Xabar"></textarea>
+        <button class="btn main" type="submit" style="justify-content:center"><svg class="i"><use href="#send"/></svg> Yuborish</button>
+        <p id="ok"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Sardor. Barcha huquqlar himoyalangan.</footer>
+
+<script>
+// Mavzu almashtirish
+document.getElementById("theme").onclick = function () {
+  var d = document.documentElement;
+  var dark = getComputedStyle(d).getPropertyValue("--bg").trim() === "#0e0e11";
+  d.dataset.theme = dark ? "light" : "dark";
+};
+
+// Raqamlar va ko'nikma chiziqlari ko'ringanda animatsiya
+var io = new IntersectionObserver(function (items) {
+  items.forEach(function (e) {
+    if (!e.isIntersecting) return;
+    var el = e.target;
+    if (el.dataset.w) el.style.width = el.dataset.w + "%";
+    if (el.dataset.n) count(el, +el.dataset.n);
+    io.unobserve(el);
+  });
+});
+document.querySelectorAll("[data-w],[data-n]").forEach(function (el) { io.observe(el); });
+
+function count(el, max) {
+  var n = 0, step = Math.max(1, Math.ceil(max / 30));
+  var t = setInterval(function () {
+    n = Math.min(max, n + step);
+    el.textContent = n + "+";
+    if (n >= max) clearInterval(t);
+  }, 40);
+}
+
+// Aloqa formasi (namuna)
+document.getElementById("f").onsubmit = function (e) {
+  e.preventDefault();
+  document.getElementById("ok").textContent = "Rahmat! Xabaringiz yuborildi ✓";
+  e.target.reset();
+};
+</script>
+</body>
+</html>
